@@ -1,7 +1,7 @@
 NAME			=	fdf
 SHELL			=	/bin/bash
 
-CC				=	gcc
+CC				=	cc
 CFLAGS			=	-g -Wall -Wextra -Werror
 
 LIBFT_DIR		=	libft/
