@@ -29,3 +29,4 @@ t_mlx	*init_mlx(const char *name)
 			);
 	return (mlx);
 }
+

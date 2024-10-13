@@ -78,6 +78,7 @@ int	mouse_move(int x, int y, void *params)
 	controls->mouse.pos.y = y;
 	return (0);
 }
+
 int	close_win(void *params)
 {
 	if (params != NULL)

@@ -1,9 +1,9 @@
 #ifndef FDF_H
 #define FDF_H
 
-#include <stdbool.h>
-#include <stdlib.h>
-#include "libft.h"
+# include "libft.h"
+# include <stdbool.h>
+# include <stdlib.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
 
@@ -73,7 +73,7 @@ typedef struct s_matrix {
 // controls
 
 typedef struct s_mouse {
-  t_vec pos;
+  t_vec position;
   bool is_down;
 } t_mouse;
 
