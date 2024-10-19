@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   controls.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/19 19:22:08 by lcluzan           #+#    #+#             */
+/*   Updated: 2024/10/19 20:51:15 by lcluzan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include "mlx.h"
 #include <stdio.h>
@@ -18,73 +30,74 @@ t_controls	*new_controls(t_mlx *mlx, t_map *map)
 	return (controls);
 }
 
-int	mouse_down(int button, int x, int y, void *params)
+void	add_vec(t_point *point, void *params)
 {
-	t_controls	*controls;
+	t_vec	vec;
 
-	controls = (t_controls *)params;
-	if (
-		button == MOUSE_CLICK_LEFT
-		|| button == MOUSE_CLICK_RIGHT
-		|| button == MOUSE_CLICK_MIDDLE
-	)
-	{
-		controls->mouse.pos.x = x;
-		controls->mouse.pos.y = y;
-		controls->mouse.is_down = true;
-	}
-	return (0);
+	vec = *(t_vec *)params;
+	point->v.x += vec.x;
+	point->v.y += vec.y;
+	point->v.z += vec.z;
 }
 
-int	mouse_up(int button, int x, int y, void *params)
+void	translate_map(int button, t_mlx *mlx, t_map *map)
 {
-	t_controls	*controls;
+	t_vec	vec;
+	double	shift;
 
-	controls = (t_controls *)params;
-	(void)x;
-	(void)y;
-	if (
-		button == MOUSE_CLICK_LEFT
-		|| button == MOUSE_CLICK_RIGHT
-		|| button == MOUSE_CLICK_MIDDLE
-	)
-	{
-		controls->mouse.pos.x = 0;
-		controls->mouse.pos.y = 0;
-		controls->mouse.is_down = false;
-	}
-	return (0);
+	shift = KEY_SENSITIVITY * 0.1;
+	if (button == KEY_LEFT)
+		vec = (t_vec){-shift, 0, 0};
+	else if (button == KEY_UP)
+		vec = (t_vec){0, shift, 0};
+	else if (button == KEY_RIGHT)
+		vec = (t_vec){shift, 0, 0};
+	else if (button == KEY_DOWN)
+		vec = (t_vec){0, -shift, 0};
+	else
+		return ;
+	for_each_point(map, add_vec, &vec);
+	draw_lines(mlx, map);
 }
 
-int	mouse_move(int x, int y, void *params)
+void	scale_map(int button, t_mlx *mlx, t_map *map)
 {
-	t_controls	*controls;
-	double		x_angle;
-	double		y_angle;
 	t_matrix	matrix;
+	double		scale_factor;
 
-	controls = (t_controls *)params;
-	if (!controls->mouse.is_down)
-		return (0);
-	y_angle = (double)(controls->mouse.pos.x - x) / MOUSE_SENSITIVITY;
-	x_angle = (double)(y - controls->mouse.pos.y) / MOUSE_SENSITIVITY;
-	matrix = multiply_matrix_by_matrix(
-			get_rotation_matrix(y_angle, 'y'),
-			get_rotation_matrix(x_angle, 'x')
-			);
-	for_each_point(controls->map, apply_matrix, &matrix);
-	draw_lines(controls->mlx, controls->map);
-	controls->mouse.pos.x = x;
-	controls->mouse.pos.y = y;
-	return (0);
+	scale_factor = KEY_SENSITIVITY * 0.002;
+	if (button == KEY_PLUS)
+		matrix = get_scale_matrix(1 + scale_factor);
+	else if (button == KEY_MINUS)
+		matrix = get_scale_matrix(1 - scale_factor);
+	else
+		return ;
+	for_each_point(map, apply_matrix, &matrix);
+	draw_lines(mlx, map);
 }
 
 int	close_win(void *params)
 {
 	if (params != NULL)
-		free (params);
-	exit (0);
+		free(params);
+	exit(0);
 }
+
+int	key_press(int button, void *params)
+{
+	t_controls	*controls;
+
+	controls = (t_controls *)params;
+	if (button == KEY_LEFT || button == KEY_UP || button == KEY_RIGHT
+		|| button == KEY_DOWN)
+		translate_map(button, controls->mlx, controls->map);
+	else if (button == KEY_ESC)
+		close_win(params);
+	else if (button == KEY_PLUS || button == KEY_MINUS)
+		scale_map(button, controls->mlx, controls->map);
+	return (0);
+}
+
 t_controls	*listen_events(t_mlx *mlx, t_map *map)
 {
 	t_controls	*controls;
@@ -94,5 +107,6 @@ t_controls	*listen_events(t_mlx *mlx, t_map *map)
 	mlx_hook(mlx->win, ButtonPress, ButtonPressMask, mouse_down, controls);
 	mlx_hook(mlx->win, ButtonRelease, ButtonReleaseMask, mouse_up, controls);
 	mlx_hook(mlx->win, DestroyNotify, StructureNotifyMask, close_win, controls);
+	mlx_hook(mlx->win, KeyPress, KeyPressMask, key_press, controls);
 	return (controls);
 }

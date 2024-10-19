@@ -10,7 +10,7 @@
 # define WIDTH 1320
 # define HEIGHT 720
 # define MARGIN 120
-#define M_PI 3.14159265358979323846
+# define M_PI 3.14159265358979323846
 
 # define MOUSE_CLICK_LEFT 1
 # define MOUSE_CLICK_RIGHT 2
@@ -21,6 +21,15 @@
 # define ON_MOUSEMOVE 6
 
 # define MOUSE_SENSITIVITY 80
+# define KEY_SENSITIVITY 80
+
+# define KEY_ESC 65307
+# define KEY_LEFT 65361
+# define KEY_UP 65362
+# define KEY_RIGHT 65363
+# define KEY_DOWN 65364
+# define KEY_PLUS 65451
+# define KEY_MINUS 65453
 
 typedef struct s_options {
   char *map_path;
@@ -73,7 +82,7 @@ typedef struct s_matrix {
 // controls
 
 typedef struct s_mouse {
-  t_vec position;
+  t_vec pos;
   bool is_down;
 } t_mouse;
 
@@ -124,8 +133,14 @@ void apply_matrix(t_point *point, void *params);
 t_matrix	multiply_matrix_by_matrix(t_matrix m1, t_matrix m2);
 t_matrix get_rotation_matrix(double rad, char axis);
 t_vec	multiply_vector_by_matrix(t_vec v, t_matrix m);
+t_matrix	get_scale_matrix(double s);
 
 // mlx
 t_mlx *init_mlx(const char *name);
+
+// mouse
+int	mouse_down(int button, int x, int y, void *params);
+int	mouse_up(int button, int x, int y, void *params);
+int	mouse_move(int x, int y, void *params);
 
 #endif

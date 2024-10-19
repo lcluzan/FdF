@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   matrix.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/19 20:13:34 by lcluzan           #+#    #+#             */
+/*   Updated: 2024/10/19 20:29:06 by lcluzan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include <math.h>
 
@@ -33,6 +45,15 @@ t_matrix	get_rotation_matrix(double rad, char axis)
 		(t_vec){1, 0, 0},
 		(t_vec){0, 1, 0},
 		(t_vec){0, 0, 1}
+	});
+}
+
+t_matrix	get_scale_matrix(double s)
+{
+	return ((t_matrix){
+		(t_vec){s, 0, 0},
+		(t_vec){0, s, 0},
+		(t_vec){0, 0, s}
 	});
 }
 
