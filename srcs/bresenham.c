@@ -6,12 +6,28 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:22:12 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/21 12:22:13 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/21 12:54:05 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/*
+Place a pixel on the screen and shift the coords to place the origin at the
+center of the screen.
+
+eg. If I want to draw the point (0,0) without shifting the coords, this point
+would be located at the very top left
+corner of the screen. So we shift the coords to have it in the middle
+of the screen.
+
+We also have to invert the y axis, cause in the mlx the y axis increase
+by going down.
+
+Shift coords to match the mlx origin at the top left corner of the screen
+
+We make sure the pixel is not out the screen
+*/
 void	draw_pixel(t_mlx *mlx, t_point point)
 {
 	int		i;
@@ -52,6 +68,7 @@ void	bresenham_init(
 	*err = d[0] - d[1];
 }
 
+//Takes 2 points and draw a line using the bresenham algo
 void	draw_line(t_mlx *mlx, t_point a, t_point b)
 {
 	int32_t	d[2];
