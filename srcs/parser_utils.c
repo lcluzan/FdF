@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:23:50 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/21 12:23:51 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/24 18:02:05 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 #define HEX_PREFIX "0x"
 #define MAX_COLOR 0xffffff
 
+/*
+  Just an ugly atoi, if the parsing is successful, it returns true, otherwise,
+	false.and the result if put in the `height` parameter.
+*/
+// sign support
+// fail if empty
+// check on digits
+// parse each digit
+// assert height won't overflow (15 instead of 16 for the sign bit)
+// save height and change sign if needed
 bool	parse_height(char *str, double *height)
 {
 	int32_t	num;
@@ -44,6 +54,18 @@ bool	parse_height(char *str, double *height)
 	return (true);
 }
 
+/*
+  Same as above but it parse and hex string to generate a color struct.
+  Note that it doesn't support uppercase hex. Thus some maps are not working.
+  But anyway, this function is crap, and the one above too.
+  And you already have that part working in your own fdf.
+*/
+// check on hex prefix
+// fail if empty
+// check on hex digits and max length
+// parse each digit
+// assert max color has not been reached
+// decompose hex to color struct
 bool	parse_color(char *str, t_color *color)
 {
 	u_int32_t	hex;
