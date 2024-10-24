@@ -6,16 +6,14 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:23:26 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/24 17:44:43 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/24 17:45:22 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdlib.h>
 
 //Safely allocate a map struct and initialize some fields.
 // allocate and init map
-
 t_map	*new_map(void)
 {
 	t_map	*map;
