@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:22:08 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/19 20:51:15 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/24 15:22:22 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//Safely allocate a control struct and initialize some fields.
+//allocate and init map
 t_controls	*new_controls(t_mlx *mlx, t_map *map)
 {
 	t_controls	*controls;
@@ -98,6 +100,16 @@ int	key_press(int button, void *params)
 	return (0);
 }
 
+/*
+  This function will create a control struct, and subscribe to various mlx events.
+  Meaning a function will be called according to what happen on the computer
+  (eg. keyboard is pressed, window is closed, mouse is moved, etc.)
+
+  For each kind of event, our custom function will also receive a parameter. Here we'll pass the control struct,
+  containing our map, mlx pointer and some more data that will be used to redraw the map.
+*/
+// allocate and init controls
+// add mouse listeners
 t_controls	*listen_events(t_mlx *mlx, t_map *map)
 {
 	t_controls	*controls;
