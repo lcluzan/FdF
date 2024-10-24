@@ -6,15 +6,21 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:22:31 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/21 12:22:32 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/24 17:42:50 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include "fdf.h"
 #include "libft.h"
 
+/*
+  This function makes sure that the program args are valid and if so,
+  it will returned them parsed as an `options` struct.
+*/
+  // verify args length
+  // allocate options
+  // fill options
+  // return options
 t_options	*parse_args(int ac, char **av)
 {
 	t_options	*options;
@@ -26,11 +32,18 @@ t_options	*parse_args(int ac, char **av)
 	return (options);
 }
 
+//Just display the program usage (you're welcome)
 void	display_usage(void)
 {
 	ft_putstr_fd("./fdf <filename>\n", 1);
 }
 
+//Enrtypoint of the program, but you already knew that.
+// parse and verify args
+// parse map
+// display height and width
+// this should be called when the mlx closing window event is fired. So this code is actually leaking, but nvm
+// its puprpose is not to show you how to manage this.
 int	main(int ac, char **av)
 {
 	t_options	*options;
