@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:22:23 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/24 15:29:27 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/24 17:32:59 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,14 @@ void	draw_map_line(t_mlx *mlx, t_map *map, t_list *map_line, size_t col)
   Then loop through every points of the map and for each point, it will draw a line between the (x;y) coords
   of the points and the (x;y) coords of the point on the right (if it exists) and the one just below (if it exists too).
 */
+// clear mlx window
+// loop through points
+// We round the points cause' the coords are store in a float and our bresenham implementation doesn't work with
+// decimals.
+// draw horizontal line by connecting with the point on the right
+// draw vertical line by connecting with the point below
+// push the new version of the screen to make it appear on... the screen
+
 void	draw_lines(t_mlx *mlx, t_map *map)
 {
 	size_t	i;
@@ -105,14 +113,6 @@ void	draw_lines(t_mlx *mlx, t_map *map)
   - subscribe to mlx events
   - run the mlx loop (so the program doesn't just stop once the screen has been drawn)
 */
-  // clear mlx window
-  // loop through points
-// We round the points cause' the coords are store in a float and our bresenham implementation doesn't work with
-// decimals.
-// draw horizontal line by connecting with the point on the right
-// draw vertical line by connecting with the point below
-// push the new version of the screen to make it appear on... the screen
-
 void	draw(t_map *map)
 {
 	t_mlx	*mlx;
