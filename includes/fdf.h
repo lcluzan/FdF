@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:22:01 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/21 12:22:02 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/24 17:53:43 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include "libft.h"
 # include <stdbool.h>
 # include <stdlib.h>
+# include <stdio.h>
+# include <math.h>
+# include <sys/fcntl.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
 
