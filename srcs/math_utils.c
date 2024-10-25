@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:23:37 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/24 18:21:16 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/25 16:00:59 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int32_t	max(int32_t a, int32_t b)
 	else
 		return (b);
 }
+
 //compute the distance between 2 signed values (eg. diff(-2, 1) = 3)
 int32_t	diff(int32_t a, int32_t b)
 {
