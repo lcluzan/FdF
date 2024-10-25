@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:22:12 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/25 12:11:57 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/25 15:43:02 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	draw_pixel(t_mlx *mlx, t_point point)
 		mlx->data_addr[++i] = point.color.r;
 	}
 }
+
 /*
 	Initialize the bresenham algo
 */
