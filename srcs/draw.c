@@ -6,17 +6,15 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:22:23 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/24 17:32:59 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/25 15:51:51 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "libft.h"
-#include "mlx.h"
-#include <math.h>
 
 /*
-  This function will remove all the pixels on the screen but replacing all the screen data with zeros.
+This function will remove all the pixels on the screen but replacing all
+the screen data with zeros.
 */
 void	clear_win(t_mlx *mlx)
 {
@@ -24,13 +22,15 @@ void	clear_win(t_mlx *mlx)
 }
 
 /*
-  This function takes a point and will multiply 2 matrix to its coords. A 45º (π/4 rad) rotation on the z axis.
-  And -arctan(sqrt(2)) on the x axis.
+This function takes a point and will multiply 2 matrix to its coords.
+A 45º (π/4 rad) rotation on the z axis.
+And -arctan(sqrt(2)) on the x axis.
 
-  This way we go from a top view to an isometric view.
+This way we go from a top view to an isometric view.
 
-  It will also translate the view to the center of the screen using the map offset value. And zoom in but multiplying
-  coords by the map scale value.
+It will also translate the view to the center of the screen using the map offset
+ value. And zoom in but multiplying
+coords by the map scale value.
 */
 void	isometric_projection(t_point *point, void *params)
 {
@@ -71,18 +71,20 @@ void	draw_map_line(t_mlx *mlx, t_map *map, t_list *map_line, size_t col)
 }
 
 /*
-  This function will first clean the screen.
+This function will first clean the screen.
 
-  Then loop through every points of the map and for each point, it will draw a line between the (x;y) coords
-  of the points and the (x;y) coords of the point on the right (if it exists) and the one just below (if it exists too).
+Then loop through every points of the map and for each point, it will draw
+a line between the (x;y) coords
+of the points and the (x;y) coords of the point on the right (if it exists)
+and the one just below (if it exists too).
+clear mlx window
+loop through points
+We round the points cause' the coords are store in a float and our bresenham
+implementation doesn't work with decimals.
+draw horizontal line by connecting with the point on the right
+draw vertical line by connecting with the point below
+push the new version of the screen to make it appear on the screen
 */
-// clear mlx window
-// loop through points
-// We round the points cause' the coords are store in a float and our bresenham implementation doesn't work with
-// decimals.
-// draw horizontal line by connecting with the point on the right
-// draw vertical line by connecting with the point below
-// push the new version of the screen to make it appear on... the screen
 
 void	draw_lines(t_mlx *mlx, t_map *map)
 {
@@ -107,11 +109,12 @@ void	draw_lines(t_mlx *mlx, t_map *map)
 /*
   This function:
 
-  - initiate the mlx
-  - apply an isometric projection on the map coordinates
-  - draw the map on the screen
-  - subscribe to mlx events
-  - run the mlx loop (so the program doesn't just stop once the screen has been drawn)
+- initiate the mlx
+- apply an isometric projection on the map coordinates
+- draw the map on the screen
+- subscribe to mlx events
+- run the mlx loop (so the program doesn't just stop once the screen
+has been drawn)
 */
 void	draw(t_map *map)
 {
