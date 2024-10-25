@@ -6,14 +6,17 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:23:44 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/21 12:44:04 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/25 16:04:06 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "libft.h"
-#include "mlx.h"
 
+/*
+This function will initialize the mlx struct, which will be used to interact
+with the graphics server.
+It will also create a window and an image, which will be used to draw the map.
+*/
 t_mlx	*init_mlx(const char *name)
 {
 	char	*title;
