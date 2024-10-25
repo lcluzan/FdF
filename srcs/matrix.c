@@ -6,14 +6,15 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 20:13:34 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/24 17:52:24 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/25 16:02:48 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 /*
-How matrix multiplication works (not 100% useful, but it took me so much time so read it please):
+How matrix multiplication works (not 100% useful, but it took me so much time
+so read it please):
 
 m:
 ( a b c )
@@ -30,8 +31,10 @@ v:
 ( y )
 ( z )
 
-We'll multiple `v` by `m` and `M`. And study the result to understand how we can multiply the 2 matrix together.
-This way we can combine multiple matrix into a single one and improve performances when we have to apply the matrix
+We'll multiple `v` by `m` and `M`. And study the result to understand how we can
+multiply the 2 matrix together.
+This way we can combine multiple matrix into a single one and improve
+performances when we have to apply the matrix
 to our whole map.
 
 m * v:
@@ -54,12 +57,14 @@ And we factorize by x, y and z:
 | (Da + Ed + Fg)x + (Db + Ee + Fh)y + (Dc + Ef + Fi)z |
 ( (Ga + Hd + Ig)x + (Gb + He + Ih)y + (Gc + Hf + Ii)z )
 
-Here we got a new vector in the form of a multiplication of a vector and matrix (see m * v).
+Here we got a new vector in the form of a multiplication of a vector and matrix
+(see m * v).
 So we can deduce how to multiply the two matrices.
 */
 /*
-  This function wrap the `multiply_vector_by_matrix` function to make it usable with the `for_each_point`
-  function in `utils.c`.
+This function wrap the `multiply_vector_by_matrix` function to make it usable
+with the `for_each_point`
+function in `utils.c`.
 */
 void	apply_matrix(t_point *point, void *params)
 {
@@ -70,12 +75,11 @@ void	apply_matrix(t_point *point, void *params)
 }
 
 /*
-  Receive an axis and an angle in radians, and return the related rotation matrix.
-  If the axis is not valid (not x y or z) it will return the identity matrix that has no effect when you multiply it
-  to a vector.
+Receive an axis and an angle in radians, and return the related rotation matrix.
+If the axis is not valid (not x y or z) it will return the identity matrix that
+has no effect when you multiply it to a vector.
 */
-// the last matrix doen't have any effect
-
+//the last matrix doen't have any effect
 t_matrix	get_rotation_matrix(double rad, char axis)
 {
 	if (axis == 'x')
@@ -122,8 +126,8 @@ t_vec	multiply_vector_by_matrix(t_vec v, t_matrix m)
 	res.z = v.x * m.k.x + v.y * m.k.y + v.z * m.k.z;
 	return (res);
 }
-//Multiply 2 matrices toether (see below for more details on how it works)
 
+//Multiply 2 matrices toether (see below for more details on how it works)
 t_matrix	multiply_matrix_by_matrix(t_matrix m1, t_matrix m2)
 {
 	t_matrix	res;
