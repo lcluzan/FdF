@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:22:08 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/24 15:22:22 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/26 16:23:15 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,47 @@ void	scale_map(int button, t_mlx *mlx, t_map *map)
 	draw_lines(mlx, map);
 }
 
+void	shear_map(int button, t_mlx *mlx, t_map *map)
+{
+	t_matrix	matrix;
+	double		shear_factor;
+
+	shear_factor = 100 / KEY_SENSITIVITY * M_PI / 90;
+	if (button == KEY_Q)
+		matrix = get_shear_matrix(shear_factor, 'x');
+	else if (button == KEY_W)
+		matrix = get_shear_matrix(-shear_factor, 'x');
+	else if (button == KEY_A)
+		matrix = get_shear_matrix(shear_factor, 'y');
+	else if (button == KEY_S)
+		matrix = get_shear_matrix(-shear_factor, 'y');
+	else
+		return ;
+	for_each_point(map, apply_matrix, &matrix);
+	draw_lines(mlx, map);
+}
+
 int	close_win(void *params)
 {
 	if (params != NULL)
 		free(params);
 	exit(0);
+}
+
+void	project_map(int button, t_mlx *mlx, t_map *map)
+{
+	void	(*projection)(t_point *, void *);
+
+	if (button == KEY_C)
+		projection = cavalier_projection;
+	else if (button == KEY_I)
+		projection = isometric_projection;
+	else if (button == KEY_P)
+		projection = perspective_projection;
+	else
+		return ;
+	apply_projection(mlx, map, projection);
+	draw_lines(mlx, map);
 }
 
 int	key_press(int button, void *params)
@@ -97,16 +133,22 @@ int	key_press(int button, void *params)
 		close_win(params);
 	else if (button == KEY_PLUS || button == KEY_MINUS)
 		scale_map(button, controls->mlx, controls->map);
+	else if (button == KEY_Q || button == KEY_W || button == KEY_A
+		|| button == KEY_S)
+		shear_map(button, controls->mlx, controls->map);
+	else if (button == KEY_P || button == KEY_I || button == KEY_C)
+		project_map(button, controls->mlx, controls->map);
 	return (0);
 }
 
 /*
-  This function will create a control struct, and subscribe to various mlx events.
-  Meaning a function will be called according to what happen on the computer
-  (eg. keyboard is pressed, window is closed, mouse is moved, etc.)
-
-  For each kind of event, our custom function will also receive a parameter. Here we'll pass the control struct,
-  containing our map, mlx pointer and some more data that will be used to redraw the map.
+This function will create a control struct, and subscribe to various mlx events.
+Meaning a function will be called according to what happen on the computer
+(eg. keyboard is pressed, window is closed, mouse is moved, etc.)
+For each kind of event, our custom function will also receive a parameter.
+Here we'll pass the control struct,
+containing our map, mlx pointer and some more data that will be used to
+redraw the map.
 */
 // allocate and init controls
 // add mouse listeners
