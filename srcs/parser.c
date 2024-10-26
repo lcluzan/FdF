@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:23:59 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/25 16:23:48 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/26 16:53:33 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ t_point	*parse_line(char *raw_line, size_t row, size_t *width)
 	while (splitted_line[*width])
 		++*width;
 	line = malloc(sizeof(t_point) * *width);
+	if (!line)
+		exit_with_error("Failed to allocate memory");
 	i = 0;
 	while (splitted_line[i])
 	{
@@ -94,16 +96,16 @@ bool	parse_raw_line(t_map *map, int fd, size_t *tmp_width)
 	if (!raw_line)
 		return (false);
 	line = ft_lstnew(parse_line(raw_line, map->height, tmp_width));
-	if (!map->lines)
+	if (!map->unprojected_lines)
 	{
-		map->lines = line;
+		map->unprojected_lines = line;
 		map->width = *tmp_width;
 	}
 	else
 	{
 		if (map->width != *tmp_width)
 			exit_with_error("Invalid map");
-		ft_lstadd_front(&map->lines, line);
+		ft_lstadd_front(&map->unprojected_lines, line);
 	}
 	++map->height;
 	free(raw_line);
