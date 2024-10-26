@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:22:23 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/25 15:51:51 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/26 16:17:50 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,37 +19,6 @@ the screen data with zeros.
 void	clear_win(t_mlx *mlx)
 {
 	ft_bzero(mlx->data_addr, WIDTH * HEIGHT * (mlx->bpp / 8));
-}
-
-/*
-This function takes a point and will multiply 2 matrix to its coords.
-A 45º (π/4 rad) rotation on the z axis.
-And -arctan(sqrt(2)) on the x axis.
-
-This way we go from a top view to an isometric view.
-
-It will also translate the view to the center of the screen using the map offset
- value. And zoom in but multiplying
-coords by the map scale value.
-*/
-void	isometric_projection(t_point *point, void *params)
-{
-	t_map	*map;
-
-	map = (t_map *)params;
-	point->v.x += map->offset.x;
-	point->v.y += map->offset.y;
-	point->v.x *= map->scale;
-	point->v.y *= map->scale;
-	point->v.z *= map->scale;
-	point->v = multiply_vector_by_matrix(
-			point->v,
-			get_rotation_matrix(M_PI / 4, 'z')
-			);
-	point->v = multiply_vector_by_matrix(
-			point->v,
-			get_rotation_matrix(-atan(sqrt(2)), 'x')
-			);
 }
 
 void	draw_map_line(t_mlx *mlx, t_map *map, t_list *map_line, size_t col)
@@ -85,7 +54,6 @@ draw horizontal line by connecting with the point on the right
 draw vertical line by connecting with the point below
 push the new version of the screen to make it appear on the screen
 */
-
 void	draw_lines(t_mlx *mlx, t_map *map)
 {
 	size_t	i;
@@ -121,8 +89,7 @@ void	draw(t_map *map)
 	t_mlx	*mlx;
 
 	mlx = init_mlx(map->name);
-	for_each_point(map, isometric_projection, map);
-	draw_lines(mlx, map);
+	apply_projection(mlx, map, isometric_projection);
 	listen_events(mlx, map);
 	mlx_loop(mlx->ptr);
 }
