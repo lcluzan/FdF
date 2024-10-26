@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 20:13:34 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/25 16:02:48 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/25 17:38:44 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,33 @@ t_matrix	get_rotation_matrix(double rad, char axis)
 			(t_vec){cos(rad), -sin(rad), 0},
 			(t_vec){sin(rad), cos(rad), 0},
 			(t_vec){0, 0, 1}
+	});
+	return ((t_matrix){
+		(t_vec){1, 0, 0},
+		(t_vec){0, 1, 0},
+		(t_vec){0, 0, 1}
+	});
+}
+
+t_matrix	get_shear_matrix(double rad, char axis)
+{
+	if (axis == 'x')
+		return ((t_matrix){
+			(t_vec){1, tan(rad), 0},
+			(t_vec){0, 1, 0},
+			(t_vec){0, 0, 1}
+	});
+	else if (axis == 'y')
+		return ((t_matrix){
+			(t_vec){1, 0, 0},
+			(t_vec){tan(rad), 1, 0},
+			(t_vec){0, 0, 1}
+	});
+	else if (axis == 'z')
+		return ((t_matrix){
+			(t_vec){1, 0, 0},
+			(t_vec){0, 1, 0},
+			(t_vec){tan(rad), 0, 1}
 	});
 	return ((t_matrix){
 		(t_vec){1, 0, 0},
