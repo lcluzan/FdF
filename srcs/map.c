@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:23:26 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/24 17:45:22 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/26 16:08:17 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ t_map	*new_map(void)
 }
 
 //Free a map and all its content without memory leaks.
-
 void	free_map(t_map *map)
 {
 	ft_lstclear(&map->lines, free);
+	ft_lstclear(&map->unprojected_lines, free);
 	free(map->name);
 	free(map);
 }
