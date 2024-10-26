@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:22:01 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/24 17:53:43 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/26 16:54:03 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define FDF_H
 
 # include "libft.h"
+# include "mlx.h"
 # include <stdbool.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -26,6 +27,9 @@
 # define HEIGHT 720
 # define MARGIN 120
 # define M_PI 3.14159265358979323846
+# define M_PI_4 0.78539816339744830962
+# define M_PI_2 1.57079632679489661923
+#define EPSILON 1e-10
 
 # define MOUSE_CLICK_LEFT 1
 # define MOUSE_CLICK_RIGHT 2
@@ -45,6 +49,13 @@
 # define KEY_DOWN 65364
 # define KEY_PLUS 65451
 # define KEY_MINUS 65453
+# define KEY_Q 113
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_P 112
+# define KEY_I 105
+# define KEY_C 99
 
 typedef struct s_options {
   char *map_path;
@@ -64,6 +75,7 @@ typedef struct s_vec {
 
 typedef struct s_map {
   t_list *lines;
+  t_list *unprojected_lines;
   size_t width;
   size_t height;
   double scale;
@@ -149,6 +161,7 @@ t_matrix	multiply_matrix_by_matrix(t_matrix m1, t_matrix m2);
 t_matrix get_rotation_matrix(double rad, char axis);
 t_vec	multiply_vector_by_matrix(t_vec v, t_matrix m);
 t_matrix	get_scale_matrix(double s);
+t_matrix	get_shear_matrix(double rad, char axis);
 
 // mlx
 t_mlx *init_mlx(const char *name);
@@ -157,5 +170,11 @@ t_mlx *init_mlx(const char *name);
 int	mouse_down(int button, int x, int y, void *params);
 int	mouse_up(int button, int x, int y, void *params);
 int	mouse_move(int x, int y, void *params);
+
+// projection
+void apply_projection(t_mlx *mlx, t_map *map, void (*projection)(t_point *, void *));
+void isometric_projection(t_point *point, void *params);
+void cavalier_projection(t_point *point, void *params);
+void perspective_projection(t_point *point, void *params);
 
 #endif
