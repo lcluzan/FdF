@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:23:26 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/26 16:08:17 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/27 18:07:14 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_map	*new_map(void)
 	map->height = 0;
 	map->width = 0;
 	map->lines = NULL;
+	map->unprojected_lines = NULL;
 	return (map);
 }
 
