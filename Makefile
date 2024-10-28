@@ -15,8 +15,8 @@ MLX			=	$(addprefix $(MLX_DIR), $(MLX_NAME))
 SRCS_DIR		=	srcs/
 C_SRCS			=	$(addprefix $(SRCS_DIR), $(SRCS_LIST))
 C_SRCS_LIST		=	main.c parser.c utils.c map.c draw.c controls.c bresenham.c \
-					matrix.c mlx.c math_utils.c parser_utils.c mouse.c \
-					projection.c
+					matrix.c matrix_operations.c mlx.c math_utils.c parser_utils.c \
+					mouse.c projection.c
 
 OBJS_DIR		=	objs/
 OBJS_LIST		:=	$(patsubst %.c, %.o, $(C_SRCS_LIST))
