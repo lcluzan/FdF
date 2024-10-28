@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:16:42 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/27 18:32:28 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/28 14:51:07 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 char	*fill_stash(int fd, char *stash, char *buffer)
 {
 	ssize_t	nbytes;
+	void	*tmp;
 
 	nbytes = 1;
 	if (!stash)
@@ -24,12 +25,14 @@ char	*fill_stash(int fd, char *stash, char *buffer)
 		nbytes = read(fd, buffer, BUFFER_SIZE);
 		if (nbytes == -1)
 		{
-			free (buffer);
+			free(buffer);
 			free(stash);
 			return (NULL);
 		}
 		buffer[nbytes] = 0;
+		tmp = stash;
 		stash = ft_strjoin (stash, buffer);
+		free(tmp);
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
