@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:22:31 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/25 15:57:57 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/28 14:46:53 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,9 @@ int	main(int ac, char **av)
 		return (EXIT_FAILURE);
 	}
 	map = parse_map(options->map_path);
+	free(options);
 	if (!map)
 		exit_with_error("Unknown error\n");
-	printf("height %lu\nwidth %lu\n", map->height, map->width);
 	draw(map);
-	free_map(map);
-	free(options);
 	return (EXIT_SUCCESS);
 }
