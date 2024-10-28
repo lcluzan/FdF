@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:23:50 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/24 18:02:05 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/27 17:08:00 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,19 @@
 
 #define HEX_PREFIX "0x"
 #define MAX_COLOR 0xffffff
+
+void	free_split(char **str)
+{
+	int	i;
+
+	i = 0;
+	if (str)
+	{
+		while (str[i])
+			free(str[i++]);
+		free(str);
+	}
+}
 
 /*
   Just an ugly atoi, if the parsing is successful, it returns true, otherwise,
