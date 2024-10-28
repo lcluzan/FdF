@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:22:01 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/26 16:54:03 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/27 17:08:21 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ int32_t diff(int32_t a, int32_t b);
 // parser_utils
 bool parse_height(char *str, double *height);
 bool parse_color(char *str, t_color *color);
+void	free_split(char **str);
 
 // map
 t_map *new_map();
