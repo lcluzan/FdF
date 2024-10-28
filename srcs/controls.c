@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:22:08 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/26 16:23:15 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/28 14:46:11 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,12 @@ void	shear_map(int button, t_mlx *mlx, t_map *map)
 
 int	close_win(void *params)
 {
+	t_controls	*controls;
+
+	controls = (t_controls *)params;
+	mlx_destroy_image(controls->mlx->ptr, controls->mlx->img);
+	mlx_destroy_window(controls->mlx->ptr, controls->mlx->win);
+	free_map(controls->map);
 	if (params != NULL)
 		free(params);
 	exit(0);
