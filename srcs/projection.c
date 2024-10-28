@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:57:16 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/26 19:47:00 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/28 16:12:39 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	cavalier_projection(t_point *point, void *params)
 
 	map = (t_map *)params;
 	angle = M_PI / 4;
-
 	point->v.x += map->offset.x;
 	point->v.y += map->offset.y;
 	point->v.x *= map->scale;
@@ -106,7 +105,8 @@ Finally it will draw the lines.
 	// Free the projected lines
 	// Replace the projected lines with the unprojected lines
 */
-void	apply_projection(t_mlx *mlx, t_map *map, void (*projection)(t_point *, void *))
+void	apply_projection(t_mlx *mlx, t_map *map, void (*projection)
+	(t_point *, void *))
 {
 	t_list	*line;
 	t_list	*tmp;
