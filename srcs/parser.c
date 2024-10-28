@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:23:59 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/28 13:46:23 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/28 16:10:31 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,4 +171,3 @@ t_map	*parse_map(char *map_path)
 	map->name = ft_strdup(map_path);
 	return (map);
 }
-
