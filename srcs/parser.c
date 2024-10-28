@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:23:59 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/26 16:53:33 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/28 13:46:23 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_point	parse_map_point(char *raw_map_point)
 		point.color = WHITE;
 	if (splitted_map_point[1] && splitted_map_point[2])
 		exit_with_error("Failed to parse map");
+	free_split(splitted_map_point);
 	return (point);
 }
 
@@ -78,6 +79,7 @@ t_point	*parse_line(char *raw_line, size_t row, size_t *width)
 		line[i].v.y = -(int)row;
 		++i;
 	}
+	free_split(splitted_line);
 	return (line);
 }
 
@@ -95,6 +97,7 @@ bool	parse_raw_line(t_map *map, int fd, size_t *tmp_width)
 	raw_line = get_next_line(fd);
 	if (!raw_line)
 		return (false);
+	(void)tmp_width;
 	line = ft_lstnew(parse_line(raw_line, map->height, tmp_width));
 	if (!map->unprojected_lines)
 	{
@@ -161,9 +164,11 @@ t_map	*parse_map(char *map_path)
 		if (!parse_raw_line(map, fd, &tmp_width))
 			break ;
 	}
+	close(fd);
 	map->scale = (double)min(WIDTH / map->width / 2, HEIGHT / map->height / 2);
 	map->offset.x = -(((double)map->width - 1) / 2);
 	map->offset.y = ((double)map->height - 1) / 2;
 	map->name = ft_strdup(map_path);
 	return (map);
 }
+
