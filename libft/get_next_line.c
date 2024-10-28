@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:16:42 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/07/18 15:54:34 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/27 18:32:28 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*fill_stash(int fd, char *stash, char *buffer)
 		if (nbytes == -1)
 		{
 			free (buffer);
+			free(stash);
 			return (NULL);
 		}
 		buffer[nbytes] = 0;
