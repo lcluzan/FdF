@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:22:01 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/28 18:08:12 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/29 13:46:21 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ typedef struct s_controls {
 # define WHITE ((t_color){0xff, 0xff, 0xff})
 
 // parser
-t_map		*parse_map(char *map_path);
+t_map		*parse_map(t_options *options);
 
 // utils
 void		exit_with_error(const char *message);
@@ -130,7 +130,7 @@ bool		is_hex_alpha(int c);
 void		for_each_point(t_map *map, void (*fn)(t_point *point, void *params),
 				void *params);
 t_point		round_point(t_point p);
-int			open_map(char *map_path);
+int			open_map(t_options *options);
 
 // math_utils
 int32_t		abs(int32_t n);
