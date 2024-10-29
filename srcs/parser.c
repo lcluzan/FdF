@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:23:59 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/29 13:45:28 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/29 13:54:50 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ t_point	parse_map_point(char *raw_map_point)
 			exit_with_error("Failed to parse map");
 	}
 	else
-		point.color = WHITE;
+	{
+		point.color.r = 0xff;
+		point.color.g = 0xff;
+		point.color.b = 0xff;
+	}
 	if (splitted_map_point[1] && splitted_map_point[2])
 		exit_with_error("Failed to parse map");
 	free_split(splitted_map_point);
