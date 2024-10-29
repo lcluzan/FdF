@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:22:01 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/29 13:46:21 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/29 13:56:17 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,6 @@ typedef struct s_controls {
 	t_map	*map;
 	t_mlx	*mlx;
 }	t_controls;
-
-# define WHITE ((t_color){0xff, 0xff, 0xff})
 
 // parser
 t_map		*parse_map(t_options *options);
