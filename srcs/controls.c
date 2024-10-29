@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:22:08 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/28 16:33:28 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/29 13:40:15 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,11 @@ int	close_win(void *params)
 
 	controls = (t_controls *)params;
 	mlx_destroy_image(controls->mlx->ptr, controls->mlx->img);
+	mlx_clear_window(controls->mlx->ptr, controls->mlx->win);
 	mlx_destroy_window(controls->mlx->ptr, controls->mlx->win);
+	mlx_destroy_display(controls->mlx->ptr);
+	free(controls->mlx->ptr);
+	free(controls->mlx);
 	free_map(controls->map);
 	if (params != NULL)
 		free(params);
