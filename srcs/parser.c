@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:23:59 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/28 16:10:31 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/29 13:45:28 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,13 +151,13 @@ compute scale and offset values.
 also save the map name as the map path. It will be used as the title of our
 program window.
 */
-t_map	*parse_map(char *map_path)
+t_map	*parse_map(t_options *options)
 {
 	int		fd;
 	t_map	*map;
 	size_t	tmp_width;
 
-	fd = open_map(map_path);
+	fd = open_map(options);
 	map = new_map();
 	while (true)
 	{
@@ -168,6 +168,6 @@ t_map	*parse_map(char *map_path)
 	map->scale = (double)min(WIDTH / map->width / 2, HEIGHT / map->height / 2);
 	map->offset.x = -(((double)map->width - 1) / 2);
 	map->offset.y = ((double)map->height - 1) / 2;
-	map->name = ft_strdup(map_path);
+	map->name = ft_strdup(options->map_path);
 	return (map);
 }

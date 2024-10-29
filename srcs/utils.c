@@ -6,7 +6,7 @@
 /*   By: lcluzan <lcluzan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:24:05 by lcluzan           #+#    #+#             */
-/*   Updated: 2024/10/24 18:18:19 by lcluzan          ###   ########.fr       */
+/*   Updated: 2024/10/29 13:47:44 by lcluzan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,15 @@ t_point	round_point(t_point p)
 }
 
 //Just open a file and make sure it worked.
-int	open_map(char *map_path)
+int	open_map(t_options *options)
 {
 	int	fd;
 
-	fd = open(map_path, O_RDONLY);
+	fd = open(options->map_path, O_RDONLY);
 	if (fd == -1)
+	{
+		free(options);
 		exit_with_error("Failed to open the file");
+	}
 	return (fd);
 }
